@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,CAAC;EACE,UAAU,EAAE,UAAU;;AAGzB,IAAI;EACA,gBAAgB,EAAE,IAAI;EACtB,MAAM,EAAE,CAAC;EACT,WAAW,EAAE,KAAK",
+"sources": ["clock_25_5.scss"],
+"names": [],
+"file": "clock_25_5.css"
+}

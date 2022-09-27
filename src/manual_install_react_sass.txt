@@ -1,0 +1,12 @@
+27 de sep 14:02
+1. install nodejs in fedora
+1.1 install npm 
+2. install project react with sudo npx create-react-app <name_project>
+3. run project with npm start
+4. clear app.js and delete body and import style app.css
+5. edit public/index.html and add tag script 
+6. install bootstrap with npm install bootstrap
+7. install sass:
+7.1 install with command: sudo dnf install ruby-thor
+7.2 install with command: sudo dnf install ruby-devel
+7.3 install with command: sudo gem install sass
