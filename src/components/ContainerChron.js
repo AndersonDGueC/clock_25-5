@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import LabelChron from './LabelChron'
 import ButtonChron from './ButtonChron'
 import DisplayChron from './DisplayChron'
 import ClockContext from './store/ClockContext'
+import INITIAL_STATE_CLOCK from './store/initialStateClock'
+import {reducerClock} from './store/clockFunction'
+import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, reset_click} from './store/actionClock'
 
 const ContainerChron=()=>{
+
+const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
 const decrementBreakClick=(e)=>{
 console.log('Hello World Decrement Break')
@@ -23,6 +28,7 @@ console.log('Hello World Increment Session')
 }
 
 return(
+	<ClockContext.Provider value={[state,dispatch]}>
 	<div>
 	<div id='break_container'>
 	<LabelChron name={'break-label'} text={'Break Length'}/>
@@ -45,6 +51,7 @@ return(
 	<ButtonChron name={'reset'} type={'O'}/>
 	</div>
 	</div>
+	</ClockContext.Provider>
 )
 }
 

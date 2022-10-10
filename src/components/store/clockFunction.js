@@ -1,5 +1,5 @@
-import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, START_STOP, RESET}
-import initialStateClock from './initialStateClock'
+import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, START_STOP, RESET} from './actionTypeClock'
+import initialStateClock from './initialStateClock';
 
 export const reducerClock=(state, action)=>{
 	switch(action.type){
