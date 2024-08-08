@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import LabelChron from './LabelChron'
 import ButtonChron from './ButtonChron'
 import DisplayChron from './DisplayChron'
@@ -10,6 +10,22 @@ import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_sto
 const ContainerChron=()=>{
 
 const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
+
+useEffect(()=>{
+	let interval=null;
+	if(state.write_sr_sp){
+		interval=setInterval(()=>{
+			return{time:state.time-1}
+		},1000)
+	}
+	/*else{
+		clearInterval(interval)
+	}
+	return()=>{
+		clearInterval(interval)
+	}*/
+}, [state.write_sr_sp])
+
 
 const decrementBreakClick=()=>{
 //console.log(state)
@@ -29,6 +45,12 @@ dispatch(dec_sess_click())
 const incrementSessionClick=()=>{
 //console.log('Hello World Increment Session')
 dispatch(inc_ses_click())
+}
+
+const startStopClick=()=>{
+//console.log("h! H4ck3R")
+console.log(state.time)
+dispatch(start_stop_click())	
 }
 
 
@@ -53,7 +75,7 @@ return(
 	<DisplayChron named={'time-left'} textd={'25:00'}/>
 	</div>
 	<div>
-	<ButtonChron name={'start_stop'} type={'>||'}/>
+	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
 	<ButtonChron name={'reset'} type={'O'}/>
 	</div>
 	</div>

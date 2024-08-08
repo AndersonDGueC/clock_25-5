@@ -8,6 +8,6 @@ export const dec_sess_click=()=>({type:DEC_SESS, flag_decs:true});
 
 export const dec_brek_click=()=>({type:DEC_BREK, flag_incs:true});
 
-export const start_stop_click=()=>({type:START_STOP});
+export const start_stop_click=()=>({type:START_STOP, flag_active:true});
 
 export const reset_click=()=>({type:RESET})

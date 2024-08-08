@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, START_STOP, RESET} from './actionTypeClock'
 import initialStateClock from './initialStateClock';
 
@@ -35,7 +36,7 @@ export const reducerClock=(state, action)=>{
 	}
 
 	case START_STOP:
-
+	return{...state, write_sr_sp:action.flag_active}
 	case RESET:
 
 	default:
