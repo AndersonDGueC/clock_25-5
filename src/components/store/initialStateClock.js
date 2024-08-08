@@ -1,7 +1,11 @@
 export default{
-brek:5,
+break:5,
 session:25,
 counter:0,
 string_sb:'Session',
-write_sr_sp:false
+write_sr_sp:false,
+tflagincb:true,
+tflagdecb:true,
+tflagincs:true,
+tflagdecs:true
 }

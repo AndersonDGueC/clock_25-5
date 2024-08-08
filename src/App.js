@@ -6,8 +6,8 @@ function App() {
   return (
     <div className='container-fluid'>
      <div className='d-flex justify-content-center align-items-center'>
-	<div classname='col-xs-6 p-5 rounded box'>
-	<div classname='mb-4'>
+	<div className='col-xs-6 p-5 rounded box'>
+	<div className='mb-4'>
 	<ContainerChron/>
 	</div>
     	</div>

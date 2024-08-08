@@ -4,15 +4,35 @@ import initialStateClock from './initialStateClock';
 export const reducerClock=(state, action)=>{
 	switch(action.type){
 	case INC_SESS:
-	alert("Hola incrementar session")
-	
+	console.log(state.session)
+	if(state.session==='25')
+	return{...state}
+	else{
+	return{...state, session:state.session+1}
+	}
 	case INC_BREK:
-
+	console.log(state.break)
+	if(state.break==='5'){
+	return{...state}
+	}
+	else{
+	return{...state, break:state.break+1}
+	}
 	case DEC_SESS:
-
-
+	console.log(state.session)
+	if(state.session==='25'){
+	return{...state}
+	}
+	else{
+	return{...state, session:state.session-1}
+	}
 	case DEC_BREK:
-
+	if(state.break==='5'){
+	return{...state}
+	}
+	else{
+	return{...state, break:state.break-1}
+	}
 
 	case START_STOP:
 
