@@ -1,4 +1,6 @@
+
 const DisplayChron=({named, textd})=>{
+
 	return(
 	<div id={named}>
 	{textd}

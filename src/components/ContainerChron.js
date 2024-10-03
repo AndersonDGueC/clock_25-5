@@ -1,31 +1,17 @@
-import React, {useEffect, useReducer} from 'react';
+import React, {useReducer, useEffect} from 'react';
 import LabelChron from './LabelChron'
 import ButtonChron from './ButtonChron'
 import DisplayChron from './DisplayChron'
+import CounterClock from './CounterClock';
 import ClockContext from './store/ClockContext'
 import INITIAL_STATE_CLOCK from './store/initialStateClock'
 import {reducerClock} from './store/clockFunction'
 import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, reset_click} from './store/actionClock'
 
+
 const ContainerChron=()=>{
 
 const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
-
-useEffect(()=>{
-	let interval=null;
-	if(state.write_sr_sp){
-		interval=setInterval(()=>{
-			return{time:state.time-1}
-		},1000)
-	}
-	/*else{
-		clearInterval(interval)
-	}
-	return()=>{
-		clearInterval(interval)
-	}*/
-}, [state.write_sr_sp])
-
 
 const decrementBreakClick=()=>{
 //console.log(state)
@@ -48,11 +34,16 @@ dispatch(inc_ses_click())
 }
 
 const startStopClick=()=>{
-//console.log("h! H4ck3R")
-console.log(state.time)
-dispatch(start_stop_click())	
+console.log("enable")
+	dispatch(start_stop_click())
+	
 }
 
+const resetClick=()=>{
+	console.log("enable_reset")
+	dispatch(reset_click())
+}
+//
 
 
 return(
@@ -72,11 +63,11 @@ return(
 	</div>
 	<div>
 	<LabelChron name={'timer-label'} text={'Session'}/>
-	<DisplayChron named={'time-left'} textd={'25:00'}/>
+	<CounterClock named={'time-left'}/>
 	</div>
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
-	<ButtonChron name={'reset'} type={'O'}/>
+	<ButtonChron name={'reset'} type={'O'} push={resetClick}/>
 	</div>
 	</div>
 	</ClockContext.Provider>

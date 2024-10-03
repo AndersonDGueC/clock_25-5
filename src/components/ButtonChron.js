@@ -1,5 +1,5 @@
 const ButtonChron=({name,type,push})=>{
-	return(
+		return(
 	<div>
 	<button id={name} onClick={push}>{type}</button>
 	</div>
