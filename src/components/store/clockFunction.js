@@ -38,14 +38,14 @@ export const reducerClock=(state, action)=>{
 	}
 
 	case START_STOP:
-		
+		if(state.write_sr_sp){
 	return{...state, write_sr_sp:action.flag_active}
-	
+		}
 	case RESET:
 	return initialStateClock
 
 	default:
-	   return initialStateClock
+	return initialStateClock
 	}
 }
 
