@@ -6,15 +6,23 @@ const CounterClock=(namec)=>{
     const [state]=useContext(ClockContext)
 
     useEffect(()=>{
-		if(1){			
-		setInterval(()=>{
+		let interval=null;
+
+		if(state.active&&state.pause===false){			
+		interval=setInterval(()=>{
 			//setState(state=>({...state, time:state.time-1}));
 			state.time=state.time-1
 			console.log(state.time)
-			console.log(state.write_sr_sp)
-		},1000)
-	}
-	},[])
+		},1000);
+		}
+		else{
+			clearInterval(interval);
+		}
+		return ()=>{
+			clearInterval(interval);
+		}
+	},[state.active,state.pause]);
+	
 
 
 

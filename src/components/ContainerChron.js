@@ -35,6 +35,7 @@ dispatch(inc_ses_click())
 
 const startStopClick=()=>{
 console.log("enable")
+
 	dispatch(start_stop_click())
 	
 }
