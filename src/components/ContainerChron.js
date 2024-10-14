@@ -6,7 +6,7 @@ import AudioBeep from './AudioBeep'
 import ClockContext from './store/ClockContext'
 import INITIAL_STATE_CLOCK from './store/initialStateClock'
 import {reducerClock} from './store/clockFunction'
-import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, reset_click} from './store/actionClock'
+import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, count_back_click, reset_click} from './store/actionClock'
 
 
 const ContainerChron=()=>{
@@ -22,6 +22,37 @@ const timeFormatter=()=>{
 	const formattedMinutes=minutes<10?'0'+minutes:minutes
 	return `${formattedMinutes}:${formattedSeconds}`
 }
+
+const timeout=()=>{setTimeout(()=>{
+	if(state.time&&state.play){
+		dispatch(count_back_click())
+		
+	}
+},1000)
+}
+
+const clock=()=>{
+	
+	/*setTimeout(()=>{
+		if(state.time&&state.play){
+			dispatch(count_back_click())
+			
+		}
+	},1000)
+	*/
+	if(state.play){
+	timeout()
+	//resetTimer()
+	}
+	else{
+		clearTimeout(timeout)
+	}
+
+}
+
+useEffect(()=>{
+	clock()
+},[state.play,state.time,timeout])
 
 const decrementBreakClick=()=>{
 //console.log(state)
@@ -44,8 +75,8 @@ dispatch(inc_ses_click())
 }
 
 const startStopClick=()=>{
-console.log("enable")
-
+ clearTimeout(timeout)
+	
 	dispatch(start_stop_click())
 	
 }

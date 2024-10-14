@@ -1,7 +1,7 @@
 
-import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, START_STOP, RESET} from './actionTypeClock'
+import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, COUNT_BACK, START_STOP, RESET} from './actionTypeClock'
 import initialStateClock from './initialStateClock';
-var second=0
+
 export const reducerClock=(state, action)=>{
 	switch(action.type){
 	case INC_SESS:
@@ -12,6 +12,7 @@ export const reducerClock=(state, action)=>{
 	else{
 	return{...state}
 	}
+	
 	case INC_BREK:
 	console.log(state.break)
 	if(state.break<'60'){
@@ -20,6 +21,7 @@ export const reducerClock=(state, action)=>{
 	else{
 	return{...state}
 	}
+	
 	case DEC_SESS:
 	console.log(state.session)
 	if(state.session>'1'){
@@ -28,6 +30,7 @@ export const reducerClock=(state, action)=>{
 	else{
 	return{...state, session:state.session-1}
 	}
+	
 	case DEC_BREK:
 	console.log(state.break)
 	if(state.break>'1'){
@@ -37,14 +40,18 @@ export const reducerClock=(state, action)=>{
 	return{...state, break:state.break-1}
 	}
 
+	case COUNT_BACK:
+	return{...state, time:state.time-1}
+	
 	case START_STOP:
-		console.log("hi hacker")
-		console.log(action.flag_active)
-		console.log(state.active)
-		console.log(state.pause)
-	return{...state, active:action.flag_active, pause:action.flag_pause, time:state.time}
-		
-	case RESET:
+		if(state.play){
+		return{...state, play:false}
+		}
+		else{
+		return{...state,play:true}	
+		}
+	
+		case RESET:
 		console.log(state.flag_sr_sp)
 	return initialStateClock
 
