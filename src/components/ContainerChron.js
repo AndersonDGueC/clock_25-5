@@ -13,6 +13,16 @@ const ContainerChron=()=>{
 
 const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
+const title=state.timingType==='SESSION'?"Session":"Break"
+
+const timeFormatter=()=>{
+	const minutes=Math.floor(state.time/60)
+	const seconds=state.time-minutes*60
+	const formattedSeconds=seconds<10?'0'+seconds:seconds
+	const formattedMinutes=minutes<10?'0'+minutes:minutes
+	return `${formattedMinutes}:${formattedSeconds}`
+}
+
 const decrementBreakClick=()=>{
 //console.log(state)
 dispatch(dec_brek_click())
@@ -63,8 +73,8 @@ return(
 	<ButtonChron name={'session-increment'} type={'+'} push={incrementSessionClick}/>
 	</div>
 	<div>
-	<LabelChron name={'timer-label'} text={'Session'}/>
-	<DisplayChron named={'time-left'} textd={state.time}/>
+	<LabelChron name={'timer-label'} text={title}/>
+	<DisplayChron named={'time-left'} textd={timeFormatter()}/>
 	</div>
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
