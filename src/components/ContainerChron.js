@@ -2,7 +2,7 @@ import React, {useReducer, useEffect} from 'react';
 import LabelChron from './LabelChron'
 import ButtonChron from './ButtonChron'
 import DisplayChron from './DisplayChron'
-import CounterClock from './CounterClock';
+import AudioBeep from './AudioBeep'
 import ClockContext from './store/ClockContext'
 import INITIAL_STATE_CLOCK from './store/initialStateClock'
 import {reducerClock} from './store/clockFunction'
@@ -64,11 +64,12 @@ return(
 	</div>
 	<div>
 	<LabelChron name={'timer-label'} text={'Session'}/>
-	<CounterClock named={'time-left'}/>
+	<DisplayChron named={'time-left'} textd={state.time}/>
 	</div>
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
 	<ButtonChron name={'reset'} type={'O'} push={resetClick}/>
+	<AudioBeep namea={'beep'}/>
 	</div>
 	</div>
 	</ClockContext.Provider>
