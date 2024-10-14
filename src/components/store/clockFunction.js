@@ -6,7 +6,7 @@ export const reducerClock=(state, action)=>{
 	switch(action.type){
 	case INC_SESS:
 	//console.log(state.session)
-	if(state.session<'25'){
+	if(state.session<'60'){
 	return{...state, session:state.session+1}
 	}
 	else{
@@ -14,7 +14,7 @@ export const reducerClock=(state, action)=>{
 	}
 	case INC_BREK:
 	console.log(state.break)
-	if(state.break<'5'){
+	if(state.break<'60'){
 	return{...state, break:state.break+1}
 	}
 	else{
@@ -22,16 +22,16 @@ export const reducerClock=(state, action)=>{
 	}
 	case DEC_SESS:
 	console.log(state.session)
-	if(state.session<='0'){
-	return{...state}
+	if(state.session>'1'){
+	return{...state, session:state.session-1}
 	}
 	else{
 	return{...state, session:state.session-1}
 	}
 	case DEC_BREK:
 	console.log(state.break)
-	if(state.break<='0'){
-	return{...state}
+	if(state.break>'1'){
+	return{...state, break:state.break-1}
 	}
 	else{
 	return{...state, break:state.break-1}
