@@ -6,7 +6,7 @@ import AudioBeep from './AudioBeep'
 import ClockContext from './store/ClockContext'
 import INITIAL_STATE_CLOCK from './store/initialStateClock'
 import {reducerClock} from './store/clockFunction'
-import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, count_back_click, reset_click} from './store/actionClock'
+import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, count_back_click, config_break, config_session, reset_click} from './store/actionClock'
 
 
 const ContainerChron=()=>{
@@ -31,6 +31,19 @@ const timeout=()=>{setTimeout(()=>{
 },1000)
 }
 
+const resetTimer=()=>{
+	const audio=document.getElementById("beep")
+	if(!state.time&&state.timingType==="SESSION"){
+		dispatch(config_break())
+		audio.play()
+	}
+	if(!state.time&&state.timingType==="BREAK"){
+		dispatch(config_session())
+		audio.pause()
+		audio.currentTime=0
+	}
+}
+
 const clock=()=>{
 	
 	/*setTimeout(()=>{
@@ -42,7 +55,7 @@ const clock=()=>{
 	*/
 	if(state.play){
 	timeout()
-	//resetTimer()
+	resetTimer()
 	}
 	else{
 		clearTimeout(timeout)
@@ -82,8 +95,12 @@ const startStopClick=()=>{
 }
 
 const resetClick=()=>{
-	console.log("enable_reset")
+	//console.log("enable_reset")
+	clearTimeout(timeout)
 	dispatch(reset_click())
+	const audio=document.getElementById("beep")
+	audio.pause()
+	audio.currentTime=0
 }
 //
 

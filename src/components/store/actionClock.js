@@ -1,4 +1,4 @@
-import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, COUNT_BACK, START_STOP, RESET} from './actionTypeClock'
+import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, COUNT_BACK, CONFIG_BR, CONFIG_SS, START_STOP, RESET} from './actionTypeClock'
 
 export const inc_ses_click=()=>({type:INC_SESS});
 
@@ -11,5 +11,9 @@ export const dec_brek_click=()=>({type:DEC_BREK});
 export const start_stop_click=()=>({type:START_STOP});
 
 export const count_back_click=()=>({type:COUNT_BACK});
+
+export const config_break=()=>({type:CONFIG_BR});
+
+export const config_session=()=>({type:CONFIG_SS});
 
 export const reset_click=()=>({type:RESET})

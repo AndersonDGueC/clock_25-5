@@ -1,5 +1,5 @@
 
-import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, COUNT_BACK, START_STOP, RESET} from './actionTypeClock'
+import {INC_SESS, INC_BREK, DEC_SESS, DEC_BREK, COUNT_BACK, START_STOP, CONFIG_BR, RESET, CONFIG_SS} from './actionTypeClock'
 import initialStateClock from './initialStateClock';
 
 export const reducerClock=(state, action)=>{
@@ -51,8 +51,14 @@ export const reducerClock=(state, action)=>{
 		return{...state,play:true}	
 		}
 	
-		case RESET:
-		console.log(state.flag_sr_sp)
+	case CONFIG_BR:
+	return{...state, break:state.break*60, timingType:"BREAK"}
+
+	case CONFIG_SS:
+	return{...state, session:state.session*60, timingType:"SESSION"}
+
+	case RESET:
+	console.log(state.flag_sr_sp)
 	return initialStateClock
 
 	default:
