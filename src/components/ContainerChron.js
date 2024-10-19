@@ -39,7 +39,7 @@ const resetTimer=()=>{
 		audio.play()
 		 
 	}
-	if(!state.time&&state.timingType==="BREAK"){
+	else if(!state.time&&state.timingType==="BREAK"){
 		dispatch(config_session())
 		audio.pause()
 		audio.currentTime=0
@@ -68,7 +68,7 @@ const clock=()=>{
 
 useEffect(()=>{
 	clock()
-},[state.play,state.time,timeout])
+},[state.play,state.time])
 
 const decrementBreakClick=()=>{
 //console.log(state)

@@ -52,7 +52,12 @@ export const reducerClock=(state, action)=>{
 		}
 	
 	case CONFIG_BR:
-	return{...state, break:state.break*60, timingType:"BREAK"}
+		if(state.break!=1){
+			return{...state, break:state.break*60, timingType:"BREAK"}
+		}
+		else{
+			return{...state, break:state.break, timingType:"BREAK"}
+		}
 
 	case CONFIG_SS:
 	return{...state, session:state.session*60, timingType:"SESSION"}
