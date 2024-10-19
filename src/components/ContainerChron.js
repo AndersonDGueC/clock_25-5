@@ -5,7 +5,7 @@ import DisplayChron from './DisplayChron'
 import ClockContext from './store/ClockContext'
 import INITIAL_STATE_CLOCK from './store/initialStateClock'
 import {reducerClock} from './store/clockFunction'
-import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_stop_click, count_back_click, config_break, config_session, reset_click} from './store/actionClock'
+import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_click, stop_click, count_back_click, config_break, config_session, reset_click} from './store/actionClock'
 
 
 const ContainerChron=()=>{
@@ -91,10 +91,15 @@ dispatch(inc_ses_click())
 }
 
 const startStopClick=()=>{
- clearTimeout(timeout)
+ clearInterval(timeout)
+	console.log("hi hacker")
 	
-	dispatch(start_stop_click())
-	
+	if(!state.play){	
+		dispatch(start_click())
+	}
+	else{
+		dispatch(stop_click())
+	}
 }
 
 const resetClick=()=>{

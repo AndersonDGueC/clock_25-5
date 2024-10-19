@@ -5,6 +5,7 @@ export const DEC_BREK='decr_brek';
 export const COUNT_BACK='count_back';
 export const CONFIG_BR= 'config_break';
 export const CONFIG_SS= 'config_session';
-export const START_STOP='start_stop';
+export const START='start';
+export const STOP='stop';
 export const RESET='reset';
 
