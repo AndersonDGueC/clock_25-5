@@ -58,7 +58,7 @@ export const reducerClock=(state, action)=>{
 	return{...state, session:state.session*60, timingType:"SESSION"}
 
 	case RESET:
-	console.log(state.flag_sr_sp)
+	//console.log(state.flag_sr_sp)
 	return initialStateClock
 
 	default:

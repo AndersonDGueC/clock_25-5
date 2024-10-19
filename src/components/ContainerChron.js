@@ -1,4 +1,4 @@
-import React, {useReducer, useEffect} from 'react';
+import React, {useReducer, useEffect, useRef} from 'react';
 import LabelChron from './LabelChron'
 import ButtonChron from './ButtonChron'
 import DisplayChron from './DisplayChron'
@@ -14,6 +14,8 @@ const ContainerChron=()=>{
 const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
 const title=state.timingType==='SESSION'?"Session":"Break"
+
+const audioref=useRef()
 
 const timeFormatter=()=>{
 	const minutes=Math.floor(state.time/60)
@@ -32,15 +34,18 @@ const timeout=()=>{setTimeout(()=>{
 }
 
 const resetTimer=()=>{
-	const audio=document.getElementById("beep")
+	//const audio=document.getElementById("beep")
 	if(!state.time&&state.timingType==="SESSION"){
 		dispatch(config_break())
-		audio.play()
+		//audio.play()
+		 audioref.current.play()
 	}
 	if(!state.time&&state.timingType==="BREAK"){
 		dispatch(config_session())
-		audio.pause()
-		audio.currentTime=0
+		//audio.pause()
+		//audio.currentTime=0
+		audioref.current.pause()
+		audioref.current.currentTime=0
 	}
 }
 
@@ -98,9 +103,11 @@ const resetClick=()=>{
 	//console.log("enable_reset")
 	clearTimeout(timeout)
 	dispatch(reset_click())
-	const audio=document.getElementById("beep")
-	audio.pause()
-	audio.currentTime=0
+	//const audio=document.getElementById("beep")
+	//audio.pause()
+	//audio.currentTime=0
+	audioref.current.pause()
+	audioref.current.currentTime=0
 }
 //
 
@@ -127,7 +134,11 @@ return(
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
 	<ButtonChron name={'reset'} type={'O'} push={resetClick}/>
-	<AudioBeep namea={'beep'}/>
+	{/*<AudioBeep namea={'beep'} type_ref={audioref}/>*/}
+	<audio id={'beep'} ref={audioref}
+        preload="auto"
+        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+        />
 	</div>
 	</div>
 	</ClockContext.Provider>
