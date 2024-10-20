@@ -5,7 +5,7 @@ import DisplayChron from './DisplayChron'
 import ClockContext from './store/ClockContext'
 import INITIAL_STATE_CLOCK from './store/initialStateClock'
 import {reducerClock} from './store/clockFunction'
-import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, start_click, stop_click, count_back_click, config_break, config_session, reset_click} from './store/actionClock'
+import {inc_ses_click, inc_brek_click, dec_sess_click, dec_brek_click, startstop_click, count_back_click, config_break, config_session, reset_click} from './store/actionClock'
 
 
 const ContainerChron=()=>{
@@ -13,7 +13,6 @@ const ContainerChron=()=>{
 const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
 const title=state.timingType==='SESSION'?"Session":"Break"
-
 
 
 const timeFormatter=()=>{
@@ -24,6 +23,21 @@ const timeFormatter=()=>{
 	return `${formattedMinutes}:${formattedSeconds}`
 }
 
+useEffect(()=>{
+	let sessionTimer
+	if(state.play){
+		sessionTimer=setInterval(()=>{
+	
+			dispatch(count_back_click())
+		
+	},1000)
+	}
+	return ()=>clearInterval(sessionTimer)
+},[state.play])
+
+
+
+/*
 const timeout=()=>{setTimeout(()=>{
 	if(state.time&&state.play){
 		dispatch(count_back_click())
@@ -55,7 +69,7 @@ const clock=()=>{
 			
 		}
 	},1000)
-	*/
+	
 	if(state.play){
 	timeout()
 	resetTimer()
@@ -70,6 +84,7 @@ useEffect(()=>{
 	clock()
 },[state.play,state.time])
 
+*/
 const decrementBreakClick=()=>{
 //console.log(state)
 dispatch(dec_brek_click())
@@ -91,17 +106,13 @@ dispatch(inc_ses_click())
 }
 
 const startStopClick=()=>{
- clearInterval(timeout)
+ //clearInterval(timeout)
 	console.log("hi hacker")
-	
-	if(!state.play){	
-		dispatch(start_click())
-	}
-	else{
-		dispatch(stop_click())
-	}
+dispatch(startstop_click())
+//timeInterval()	
 }
 
+/*
 const resetClick=()=>{
 	//console.log("enable_reset")
 	clearTimeout(timeout)
@@ -111,6 +122,7 @@ const resetClick=()=>{
 	audio.currentTime=0
 	
 }
+	*/
 //
 
 
@@ -135,7 +147,7 @@ return(
 	</div>
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
-	<ButtonChron name={'reset'} type={'O'} push={resetClick}/>
+	<ButtonChron name={'reset'} type={'O'} />
 	{/*<AudioBeep namea={'beep'} type_ref={audioref}/>*/}
 	<audio id={'beep'} 
         preload="auto"
