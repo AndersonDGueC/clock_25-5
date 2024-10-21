@@ -14,14 +14,17 @@ const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
 const title=state.timingType==='SESSION'?"Session":"Break"
 
-
-const timeFormatter=()=>{
-	const minutes=Math.floor(state.time/60)
+const timeFormatter=(time)=>{
+	time=time*60
+	const minutes=Math.floor(time/60)
 	const seconds=state.time-minutes*60
 	const formattedSeconds=seconds<10?'0'+seconds:seconds
 	const formattedMinutes=minutes<10?'0'+minutes:minutes
 	return `${formattedMinutes}:${formattedSeconds}`
 }
+
+const formatTimer=state.timingType==='SESSION'?timeFormatter(state.session):timeFormatter(state.break)
+
 
 useEffect(()=>{
 	let sessionTimer
@@ -112,17 +115,17 @@ dispatch(startstop_click())
 //timeInterval()	
 }
 
-/*
+
 const resetClick=()=>{
 	//console.log("enable_reset")
-	clearTimeout(timeout)
+	//clearTimeout(timeout)
 	dispatch(reset_click())
 	const audio=document.getElementById("beep")
 	audio.pause()
 	audio.currentTime=0
 	
 }
-	*/
+	
 //
 
 
@@ -143,11 +146,11 @@ return(
 	</div>
 	<div>
 	<LabelChron name={'timer-label'} text={title}/>
-	<DisplayChron named={'time-left'} textd={timeFormatter()}/>
+	<DisplayChron named={'time-left'} textd={formatTimer}/>
 	</div>
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
-	<ButtonChron name={'reset'} type={'O'} />
+	<ButtonChron name={'reset'} type={'O'} push={resetClick} />
 	{/*<AudioBeep namea={'beep'} type_ref={audioref}/>*/}
 	<audio id={'beep'} 
         preload="auto"
