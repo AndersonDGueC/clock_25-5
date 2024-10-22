@@ -42,7 +42,7 @@ export const reducerClock=(state, action)=>{
 
 	case COUNT_BACK:
 	return{...state, time:state.time-1}
-	
+			
 	case START_STOP:
 		if(!state.play){
 			return{...state, play:true}
@@ -51,22 +51,17 @@ export const reducerClock=(state, action)=>{
 			return{...state, play:false}
 		}
 	case CONFIG_BR:
-		if(state.break!==1){
-			return{...state, break:state.break*60, timingType:"BREAK"}
-		}
-		else{
-			return{...state, break:state.break, timingType:"BREAK"}
-		}
-
+	return{...state, time:state.break*60, timingType:"Break"}
+		
 	case CONFIG_SS:
-	return{...state, session:state.session*60, timingType:"SESSION"}
+	return{...state, time:state.session*60, timingType:"Session"}
 
 	case RESET:
 	//console.log(state.flag_sr_sp)
 	return initialStateClock
 
 	default:
-	return initialStateClock
+	return {...state, time:state.break*60}
 	}
 }
 

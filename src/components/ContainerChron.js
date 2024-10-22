@@ -12,10 +12,11 @@ const ContainerChron=()=>{
 
 const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
-const title=state.timingType==='SESSION'?"Session":"Break"
+const title=state.timingType==='Session'?"Session":"Break"
 
 const timeFormatter=(time)=>{
-	time=time*60
+	//time=time*60
+	
 	const minutes=Math.floor(time/60)
 	const seconds=state.time-minutes*60
 	const formattedSeconds=seconds<10?'0'+seconds:seconds
@@ -23,20 +24,29 @@ const timeFormatter=(time)=>{
 	return `${formattedMinutes}:${formattedSeconds}`
 }
 
-const formatTimer=state.timingType==='SESSION'?timeFormatter(state.session):timeFormatter(state.break)
-
+//const formatTimer=state.timingType==='Session'?timeFormatter(state.session):timeFormatter(state.break)
+const formatTimer=timeFormatter(state.time)
 
 useEffect(()=>{
-	let sessionTimer
-	if(state.play){
-		sessionTimer=setInterval(()=>{
+	let startTimer
 	
+	if(state.play){
+		startTimer=setInterval(()=>{
+			
 			dispatch(count_back_click())
-		
+			console.log(state.time)
+			if(formatTimer===`00:00`&&state.timingType==="Session"){
+				dispatch(config_break()) 
+			}
+			if(formatTimer===`00:00`&&state.timingType==="Break"){
+				dispatch(config_session())
+			}
+			
 	},1000)
 	}
-	return ()=>clearInterval(sessionTimer)
-},[state.play])
+	
+	return ()=>clearInterval(startTimer)
+},[state.play,formatTimer])
 
 
 
@@ -111,6 +121,7 @@ dispatch(inc_ses_click())
 const startStopClick=()=>{
  //clearInterval(timeout)
 	console.log("hi hacker")
+	//console.log(state.session)
 dispatch(startstop_click())
 //timeInterval()	
 }
