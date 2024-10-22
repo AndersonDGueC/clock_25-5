@@ -99,33 +99,79 @@ const resetClick=()=>{
 
 return(
 	<ClockContext.Provider value={[state,dispatch]}>
+	<div className='container-fluid'>
+	<div className='d-flex justify-content-center align-items-center'>
+	<div className='col-xs-6 p-5 rounded box'>
+	<div className='mb-4'>			
+	<div className='d-flex justify-content-center align-items-center'>
+	25+5 Clock	
+	</div>
 	<div>
+	<div className='container'>
+	<div className='row'>
+	<div className='col'>					
 	<div id='break_container'>
+	<div className='container'>
+	<div className='row'>	
 	<LabelChron name={'break-label'} text={'Break Length'}/>
+	<div className='col'>
 	<ButtonChron name={'break-decrement'} type={'-'} push={decrementBreakClick}/>
+	</div>
+	<div className='col'>
 	<DisplayChron named={'break-length'} textd={state.break}/>
+	</div>
+	<div className='col'>
 	<ButtonChron name={'break-increment'} type={'+'} push={incrementBreakClick}/>
 	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div className='col'>
 	<div id='session_container'>
+	<div className='container'>
+	<div className='row'>		
 	<LabelChron name={'session-label'} text={'Session Length'}/>
+	<div className='col'>
 	<ButtonChron name={'session-decrement'} type={'-'} push={decrementSessionClick}/>
+	</div>
+	<div className='col'>
 	<DisplayChron named={'session-length'} textd={state.session}/>
+	</div>
+	<div className='col'>
 	<ButtonChron name={'session-increment'} type={'+'} push={incrementSessionClick}/>
 	</div>
-	<div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	<div className='container'>
+	<div className='d-flex justify-content-center align-items-center'>	
+	
 	<LabelChron name={'timer-label'} text={title}/>
 	<DisplayChron named={'time-left'} textd={formatTimer}/>
-	</div>
-	<div>
-	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
-	<ButtonChron name={'reset'} type={'O'} push={resetClick} />
+	
 	
 	<audio id={'beep'} 
         preload="auto"
         src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
         />
 	</div>
+	<div className='d-flex justify-content-center align-items-center'>
+	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
+	<ButtonChron name={'reset'} type={'O'} push={resetClick} />
 	</div>
+	</div>
+	<div>
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>	
 	</ClockContext.Provider>
 )
 }
