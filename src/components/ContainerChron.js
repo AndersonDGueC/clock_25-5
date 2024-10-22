@@ -14,8 +14,10 @@ const [state, dispatch]=useReducer(reducerClock, INITIAL_STATE_CLOCK)
 
 const title=state.timingType==='Session'?"Session":"Break"
 
+const audio=document.getElementById("beep")
+
 const timeFormatter=(time)=>{
-	//time=time*60
+
 	
 	const minutes=Math.floor(time/60)
 	const seconds=state.time-minutes*60
@@ -24,7 +26,7 @@ const timeFormatter=(time)=>{
 	return `${formattedMinutes}:${formattedSeconds}`
 }
 
-//const formatTimer=state.timingType==='Session'?timeFormatter(state.session):timeFormatter(state.break)
+
 const formatTimer=timeFormatter(state.time)
 
 useEffect(()=>{
@@ -36,10 +38,13 @@ useEffect(()=>{
 			dispatch(count_back_click())
 			console.log(state.time)
 			if(formatTimer===`00:00`&&state.timingType==="Session"){
-				dispatch(config_break()) 
+				dispatch(config_break())
+				audio.play() 
 			}
 			if(formatTimer===`00:00`&&state.timingType==="Break"){
 				dispatch(config_session())
+				audio.pause()
+				audio.currentTime=0				
 			}
 			
 	},1000)
@@ -50,86 +55,38 @@ useEffect(()=>{
 
 
 
-/*
-const timeout=()=>{setTimeout(()=>{
-	if(state.time&&state.play){
-		dispatch(count_back_click())
-		
-	}
-},1000)
-}
 
-const resetTimer=()=>{
-	const audio=document.getElementById("beep")
-	if(!state.time&&state.timingType==="SESSION"){
-		dispatch(config_break())
-		audio.play()
-		 
-	}
-	else if(!state.time&&state.timingType==="BREAK"){
-		dispatch(config_session())
-		audio.pause()
-		audio.currentTime=0
-		
-	}
-}
-
-const clock=()=>{
-	
-	/*setTimeout(()=>{
-		if(state.time&&state.play){
-			dispatch(count_back_click())
-			
-		}
-	},1000)
-	
-	if(state.play){
-	timeout()
-	resetTimer()
-	}
-	else{
-		clearTimeout(timeout)
-	}
-
-}
-
-useEffect(()=>{
-	clock()
-},[state.play,state.time])
-
-*/
 const decrementBreakClick=()=>{
-//console.log(state)
+
 dispatch(dec_brek_click())
 }
 
 const incrementBreakClick=()=>{
-//console.log('Hello World Increment Break')
+
 dispatch(inc_brek_click())
 }
 
 const decrementSessionClick=()=>{
-//console.log('Hello World Decrement Session')
+
 dispatch(dec_sess_click())
 }
 
 const incrementSessionClick=()=>{
-//console.log('Hello World Increment Session')
+
 dispatch(inc_ses_click())
 }
 
 const startStopClick=()=>{
- //clearInterval(timeout)
+
 	console.log("hi hacker")
-	//console.log(state.session)
+
 dispatch(startstop_click())
-//timeInterval()	
+	
 }
 
 
 const resetClick=()=>{
-	//console.log("enable_reset")
-	//clearTimeout(timeout)
+	
 	dispatch(reset_click())
 	const audio=document.getElementById("beep")
 	audio.pause()
@@ -162,7 +119,7 @@ return(
 	<div>
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
 	<ButtonChron name={'reset'} type={'O'} push={resetClick} />
-	{/*<AudioBeep namea={'beep'} type_ref={audioref}/>*/}
+	
 	<audio id={'beep'} 
         preload="auto"
         src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"

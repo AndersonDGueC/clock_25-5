@@ -5,7 +5,6 @@ import initialStateClock from './initialStateClock';
 export const reducerClock=(state, action)=>{
 	switch(action.type){
 	case INC_SESS:
-	//console.log(state.session)
 	if(state.session<'60'){
 	return{...state, session:state.session+1, time:state.time+60}
 	}
@@ -57,7 +56,7 @@ export const reducerClock=(state, action)=>{
 	return{...state, time:state.session*60, timingType:"Session"}
 
 	case RESET:
-	//console.log(state.flag_sr_sp)
+	
 	return initialStateClock
 
 	default:
