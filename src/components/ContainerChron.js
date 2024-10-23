@@ -167,6 +167,7 @@ return(
         />
 	</div>
 	<div className='d-flex justify-content-center align-items-center'>
+	
 	<ButtonChron name={'start_stop'} type={'>||'} push={startStopClick}/>
 	<ButtonChron name={'reset'} type={'O'} push={resetClick} />
 	</div>

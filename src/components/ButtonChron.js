@@ -1,7 +1,7 @@
 const ButtonChron=({name,type,push})=>{
 		return(
 	<div>
-	<button id={name} onClick={push}>{type}</button>
+	<button className="btn btn-outline-secondary" id={name} onClick={push}>{type}</button>
 	</div>
 	)
 }
