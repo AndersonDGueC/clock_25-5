@@ -103,7 +103,7 @@ return(
 	<div className='d-flex justify-content-center align-items-center'>
 	<div className='col-xs-6 p-5 rounded box'>
 	<div className='mb-4'>			
-	<div className='d-flex justify-content-center align-items-center'>
+	<div className='d-flex justify-content-center align-items-center' id='first-title'>
 	25+5 Clock	
 	</div>
 	<div>
@@ -114,14 +114,16 @@ return(
 	<div className='container'>
 	<div className='row'>	
 	<LabelChron name={'break-label'} text={'Break Length'}/>
-	<div className='col'>
+	<div className='d-flex justify-content-center align-items-center'>
+	<div className='col col-lg-2'>
 	<ButtonChron name={'break-decrement'} type={'-'} push={decrementBreakClick}/>
 	</div>
-	<div className='col'>
+	<div className='col col-lg-2'>
 	<DisplayChron named={'break-length'} textd={state.break}/>
 	</div>
-	<div className='col'>
+	<div className='col col-lg-2'>
 	<ButtonChron name={'break-increment'} type={'+'} push={incrementBreakClick}/>
+	</div>
 	</div>
 	</div>
 	</div>
@@ -132,14 +134,16 @@ return(
 	<div className='container'>
 	<div className='row'>		
 	<LabelChron name={'session-label'} text={'Session Length'}/>
-	<div className='col'>
+	<div className='d-flex justify-content-center align-items-center'>
+	<div className='col col-lg-2'>
 	<ButtonChron name={'session-decrement'} type={'-'} push={decrementSessionClick}/>
 	</div>
-	<div className='col'>
+	<div className='col col-lg-2'>
 	<DisplayChron named={'session-length'} textd={state.session}/>
 	</div>
-	<div className='col'>
+	<div className='col col-lg-2'>
 	<ButtonChron name={'session-increment'} type={'+'} push={incrementSessionClick}/>
+	</div>
 	</div>
 	</div>
 	</div>
@@ -151,6 +155,9 @@ return(
 	<div className='d-flex justify-content-center align-items-center'>	
 	
 	<LabelChron name={'timer-label'} text={title}/>
+	
+	</div>
+	<div className='d-flex justify-content-center align-items-center'>
 	<DisplayChron named={'time-left'} textd={formatTimer}/>
 	
 	
